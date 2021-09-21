@@ -1,15 +1,33 @@
 import {UserStatus} from "./UserStatus";
-import firebase from "firebase";
+import UserRepresentation from "keycloak-admin/lib/defs/userRepresentation";
 
 class AeroUser {
-    readonly status: UserStatus
-    readonly value: firebase.User | undefined | null
-    constructor(value: firebase.User | undefined | null) {
+    readonly status: UserStatus;
+    readonly token: string | undefined;
+    static refreshTokenIntervalId: NodeJS.Timeout | undefined;
+    readonly userInfo: UserRepresentation | null | undefined;
+
+    constructor(user: UserRepresentation | null | undefined, token: string | undefined = undefined, refreshTokenIntervalId: NodeJS.Timeout | undefined = undefined) {
         this.status =
-            value === undefined ? UserStatus.Unknown :
-                value === null ? UserStatus.SignedOut :
+            user === undefined ? UserStatus.Unknown :
+                user === null ? UserStatus.SignedOut :
                     UserStatus.SignedIn
-        this.value = value
+
+        switch (this.status) {
+            case UserStatus.SignedIn:
+                this.userInfo = user;
+                this.token = token;
+                AeroUser.refreshTokenIntervalId = refreshTokenIntervalId;
+                break;
+            case UserStatus.Unknown:
+            case UserStatus.SignedOut:
+                if (AeroUser.refreshTokenIntervalId){
+                    clearInterval(AeroUser.refreshTokenIntervalId);
+                    AeroUser.refreshTokenIntervalId = undefined;
+                }
+                break;
+
+        }
     }
 }
 

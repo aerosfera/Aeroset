@@ -1,7 +1,8 @@
 import {takeLatest} from "redux-saga/effects";
-import { setAuthUser } from "../../../auth/authReducer";
-import {authProcessorSaga} from "./authProcessorSaga";
+import {signInAction} from "../../../auth/authReducer";
+import {signInSaga} from "./signInSaga";
 
 export default function* authSaga() {
-    yield takeLatest(setAuthUser, authProcessorSaga);
+    // @ts-ignore
+    yield takeLatest(signInAction, signInSaga);
 }
