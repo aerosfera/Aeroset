@@ -3,15 +3,12 @@ import * as React from "react";
 import {useAppDispatch} from "../../../../../store/store";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
-import {Checkbox, withStyles} from "@material-ui/core";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
+import {Checkbox, CheckboxProps, withStyles} from "@material-ui/core";
+import { Theme } from "@material-ui/core/styles";
 import {green} from "@material-ui/core/colors";
 import {FormControlLabelStyled} from "./style";
 import {setTargetAxisVisibility, targetAxisVisibilitySelector} from "../../../../../store/ui/scene/sceneReducer";
-import showAxisOnTargetVector from "../../scene/code/constructAxis";
-import {cameraTargetSelector} from "../../../../../store/ui/camera/cameraReducer";
 import {Scene} from "@babylonjs/core/scene";
-import {AbstractMesh} from "@babylonjs/core";
 
 const GreenCheckbox = withStyles({
     root: {
@@ -21,15 +18,14 @@ const GreenCheckbox = withStyles({
         },
     },
     checked: {},
-})((props) => <Checkbox color="default" {...props} />);
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-const SetupAxis: React.FC<{ theme: Theme, scene: Scene }> = (props) => {
+const SetupAxis: React.FC<{ theme: Theme, scene: Scene }> = () => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
     const axisIsVisible = useSelector(targetAxisVisibilitySelector)
 
-    // @ts-ignore
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setTargetAxisVisibility(event.target.checked))
     };
 

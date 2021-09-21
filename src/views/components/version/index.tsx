@@ -8,7 +8,12 @@ const loadVersion = () => {
     const versionService = IoC.get<VersionService>(VERSION_SERVICE)
     return versionService.GetVersion();
 }
-const Version: React.FC<{ isDark: boolean }> = (props) => {
+
+interface Props {
+    isDark?: boolean;
+}
+
+const Version: React.FC<Props> = (props: Props) => {
     const {t} = useTranslation()
     const {isDark} = props
     return (
@@ -19,4 +24,9 @@ const Version: React.FC<{ isDark: boolean }> = (props) => {
         </div>
     );
 }
+
+Version.defaultProps = {
+    isDark: false,
+}
+
 export default Version;

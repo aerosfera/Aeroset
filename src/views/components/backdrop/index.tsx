@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {createMuiTheme, Theme} from "@material-ui/core";
-import {ThemeProvider, withTheme} from "styled-components";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider, withTheme } from "styled-components";
 import IoC from "../../../infrastructure/ioc/IoC";
 import {EventBusService} from "../../../services/eventBus/EventBusService";
 import {EVENT_BUS_SERVICE} from "../../../infrastructure/ioc/ServiceTypes";
@@ -12,6 +12,7 @@ import {
 } from "../../../services/eventBus/EventTypes";
 import {purple} from "@material-ui/core/colors";
 import Backdrop from "@material-ui/core/Backdrop";
+import {DefaultTheme} from "../../types/theme";
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AppBackdrop: React.FC<{ theme: Theme }> = (props) => {
+const AppBackdrop: React.FC<DefaultTheme> = () => {
     const classes = useStyles();
 
     const [backdropState, setBackdropState] = useState<{
@@ -47,12 +48,11 @@ const AppBackdrop: React.FC<{ theme: Theme }> = (props) => {
         setBackdropState({open: true, message: eventMessage})
     }
 
-    function closeBackdropEventHandler(events: any[]) {
+    function closeBackdropEventHandler() {
         setBackdropState({open: false, message: ""})
     }
 
-    const {open, message} = backdropState
-    // @ts-ignore
+    const {open} = backdropState;
     const innerTheme = createMuiTheme({
         palette: {
             primary: {

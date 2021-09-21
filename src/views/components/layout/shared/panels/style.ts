@@ -45,18 +45,18 @@ export const PanelBodyContainer = styled.div<Theme>`
   margin: 16px;
 `
 
-export const FormControlStyled = styled(FormControl)<Theme>`
+export const FormControlStyled = styled(FormControl)`
   margin-left: 16px;
   margin-right: 16px;
   margin-top: 8px;
-  minWidth: 120px;
+  min-width: 120px;
 `
 
-export const FormControlLabelStyled = styled(FormControlLabel)<Theme>`
+export const FormControlLabelStyled = styled(FormControlLabel)`
   margin-left: 8px;
 `
 
-export const SelectStyled = styled(Select)<Theme>`
-  marginTop: 16px;
+export const SelectStyled = styled(Select)`
+  margin-top: 16px;
 `
 

@@ -1,6 +1,6 @@
 export interface UserAccountInfo{
-    name : name,
-    surname: surname,
-    email: email,
-    password: password
+    name : string;
+    surname: string;
+    email: string;
+    password: string;
 }

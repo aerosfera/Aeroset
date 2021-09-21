@@ -22,7 +22,7 @@ const slice = createSlice({
                 produce(state, (draft) => {
                     //ignored
                 }),
-            schemeFileLoadError: (state: SchemeSectionState, action: PayloadAction<string | null>) =>
+            schemeFileLoadError: (state: SchemeSectionState, action: PayloadAction<string>) =>
                 produce(state, (draft) => {
                     draft.schemeFileLoadError = action.payload
                 })
