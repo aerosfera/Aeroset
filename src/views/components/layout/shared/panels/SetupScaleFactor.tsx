@@ -1,5 +1,4 @@
 import * as React from "react";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
 import {useAppDispatch} from "../../../../../store/store";
 import {useTranslation} from "react-i18next";
 import {Slider} from "@material-ui/core";
@@ -10,8 +9,9 @@ import {
 } from "../../../../../store/domain/scheme/activeSchemeReducer";
 import {useSelector} from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import {DefaultTheme} from "../../../../types/theme";
 
-const SetupScaleFactor: React.FC<{ theme: Theme }> = (props) => {
+const SetupScaleFactor: React.FC<DefaultTheme> = () => {
     const dispatch = useAppDispatch();
     const {t} = useTranslation();
 

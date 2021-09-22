@@ -1,30 +1,25 @@
 import * as React from "react";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
-import {store, useAppDispatch} from "../../../../../store/store";
+import { useAppDispatch } from "../../../../../store/store";
 import {useTranslation} from "react-i18next";
 import {FormControlStyled, SelectStyled} from "./style";
 import {FormHelperText, MenuItem} from "@material-ui/core";
 import {withTheme} from "styled-components";
-import {SchemeModelType} from "../../../../types/SchemeModelType";
-import {
-    activeSchemeModeChangedSelector,
-    addActiveModelId
-} from "../../../../../store/domain/scheme/activeSchemeReducer";
-import {SchemeMode} from "../../../../../data/scheme/SchemeMode";
 import {ColorGradient} from "../../../../types/ColorGradient";
 import {
     colorGradientChanged,
     schemeModelsColorGradientSelector
 } from "../../../../../store/ui/panels/models/schemeModelsPanel";
 import {useSelector} from "react-redux";
+import {DefaultTheme} from "../../../../types/theme";
+import {ChangeEvent} from "../../../../types/event";
 
-const SetupGradient: React.FC<{ theme: Theme }> = (_) => {
+const SetupGradient: React.FC<DefaultTheme> = (_) => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
 
     const gradient = useSelector(schemeModelsColorGradientSelector)
 
-    const handleChange = (event: React.ChangeEvent<{ value: ColorGradient }>) => {
+    const handleChange = (event: ChangeEvent) => {
         dispatch(colorGradientChanged(event.target.value as ColorGradient));
     };
 

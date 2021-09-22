@@ -1,8 +1,7 @@
 import {createMuiTheme, Theme, ThemeOptions} from "@material-ui/core";
 import {defaultAppThemeValues} from "./defaultAppThemeValues";
-import {red} from "@material-ui/core/colors";
 
-declare module '@material-ui/core/styles/createMuiTheme' {
+declare module '@material-ui/core/styles' {
     interface Theme {
         app: {
             colors: {

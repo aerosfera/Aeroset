@@ -1,16 +1,17 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {ThemeProvider, withTheme} from "styled-components";
-import {createMuiTheme, Theme} from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import IoC from "../../../../infrastructure/ioc/IoC";
 import {EventBusService} from "../../../../services/eventBus/EventBusService";
 import {EVENT_BUS_SERVICE} from "../../../../infrastructure/ioc/ServiceTypes";
 import {START_PROGRESS_EVENT, STOP_PROGRESS_EVENT} from "../../../../services/eventBus/EventTypes";
-import {SnackbarEvent} from "../../snackbar/code/SnackbarEvent";
 import {ProgressContainer} from "./style";
 import {purple} from "@material-ui/core/colors";
+import {DefaultTheme} from "../../../types/theme";
 
-const Progress: React.FC<{ theme: Theme }> = (props) => {
+const Progress: React.FC<DefaultTheme> = (props: DefaultTheme) => {
+    const { theme } = props;
     const [state, setState] = useState<{
         title: string,
         isOpen: boolean
@@ -34,13 +35,11 @@ const Progress: React.FC<{ theme: Theme }> = (props) => {
         setState({title: title, isOpen: true})
     }
 
-    function stopProgressHandler(events: any[]) {
-        const title: string = events[0] as string
+    function stopProgressHandler() {
         setState({title: "", isOpen: false})
     }
 
     const {title, isOpen} = state
-    // @ts-ignore
     const innerTheme = createMuiTheme({
         palette: {
             primary: {
@@ -53,7 +52,7 @@ const Progress: React.FC<{ theme: Theme }> = (props) => {
     });
     return (
         <ThemeProvider theme={innerTheme}>
-            <ProgressContainer isOpen={isOpen}>
+            <ProgressContainer Theme={theme} isOpen={isOpen}>
                 <LinearProgress title={title} color={"secondary"}/>
             </ProgressContainer>
         </ThemeProvider>

@@ -3,18 +3,19 @@ import * as React from "react";
 import {useAppDispatch} from "../../../../../store/store";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
-import {FormHelperText, MenuItem, Select} from "@material-ui/core";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
+import {FormHelperText, MenuItem} from "@material-ui/core";
 import {FormControlStyled, SelectStyled} from "./style";
 import {cameraModeChanged, cameraTargetModeSelector} from "../../../../../store/ui/camera/cameraReducer";
 import {CameraMode} from "../../../../types/CameraMode";
+import {ChangeEvent} from "../../../../types/event";
+import {DefaultTheme} from "../../../../types/theme";
 
-const SetupCameraMode: React.FC<{ theme: Theme }> = (_) => {
+const SetupCameraMode: React.FC<DefaultTheme> = () => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
     const cameraMode = useSelector(cameraTargetModeSelector)
 
-    const handleChange = (event: React.ChangeEvent<{ value: CameraMode }>) => {
+    const handleChange = (event: ChangeEvent) => {
         dispatch(cameraModeChanged(event.target.value as CameraMode))
     };
 
@@ -34,7 +35,6 @@ const SetupCameraMode: React.FC<{ theme: Theme }> = (_) => {
 
         </React.Fragment>
     )
-
 }
 
 export default withTheme(SetupCameraMode)

@@ -1,6 +1,5 @@
 import * as React from "react";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
-import {store, useAppDispatch} from "../../../../../store/store";
+import {useAppDispatch} from "../../../../../store/store";
 import {useTranslation} from "react-i18next";
 import {FormControlStyled, SelectStyled} from "./style";
 import {FormHelperText, MenuItem} from "@material-ui/core";
@@ -8,16 +7,17 @@ import {withTheme} from "styled-components";
 import {SchemeModelType} from "../../../../types/SchemeModelType";
 import {useSelector} from "react-redux";
 import {schemeActiveModelSelector, setActiveModel} from "../../../../../store/ui/panels/models/schemeModelsPanel";
-import _ from 'lodash';
+import {ChangeEvent} from "../../../../types/event";
+import {DefaultTheme} from "../../../../types/theme";
 
-const SetupSchemeModels: React.FC<{ theme: Theme }> = (props) => {
+const SetupSchemeModels: React.FC<DefaultTheme> = () => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
 
     const activeModel = useSelector(schemeActiveModelSelector);
 
-    const handleChange = (event: React.ChangeEvent<{ value: SchemeModelType }>) => {
-        const value = event.target.value;
+    const handleChange = (event: ChangeEvent) => {
+        const value = event.target.value as SchemeModelType;
 
         switch (value) {
             case SchemeModelType.Pressure:

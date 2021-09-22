@@ -1,15 +1,11 @@
 import * as React from "react";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
 import {withTheme} from "styled-components";
 import IoC from "../../../../../infrastructure/ioc/IoC";
 import ColorGradientService from "../../../../../services/colorGradient/GradientService";
 import {COLOR_GRADIENT_SERVICE} from "../../../../../infrastructure/ioc/ServiceTypes";
-import {useSelector} from "react-redux";
-import {schemeModelsColorGradientSelector} from "../../../../../store/ui/panels/models/schemeModelsPanel";
+import {DefaultTheme} from "../../../../types/theme";
 
-const ColorGradientView: React.FC<{ theme: Theme }> = (props) => {
-    const gradient = useSelector(schemeModelsColorGradientSelector);
-
+const ColorGradientView: React.FC<DefaultTheme> = () => {
     const colorGradientService = IoC.get<ColorGradientService>(COLOR_GRADIENT_SERVICE);
     const linearGradientCss = colorGradientService.getGradientAsCSSProperty();
 

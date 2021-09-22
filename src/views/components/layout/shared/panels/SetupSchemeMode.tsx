@@ -5,16 +5,17 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {schemeModeChanged, activeSchemeModeChangedSelector} from "../../../../../store/domain/scheme/activeSchemeReducer";
 import {FormHelperText, MenuItem} from "@material-ui/core";
-import {Theme} from "@material-ui/core/styles/createMuiTheme";
 import {SchemeMode} from "../../../../../data/scheme/SchemeMode";
 import { FormControlStyled, SelectStyled } from "./style";
+import {ChangeEvent} from "../../../../types/event";
+import {DefaultTheme} from "../../../../types/theme";
 
-const SetupSchemeMode: React.FC<{ theme: Theme }> = (_) => {
+const SetupSchemeMode: React.FC<DefaultTheme> = () => {
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
     const schemeMode = useSelector(activeSchemeModeChangedSelector)
 
-    const handleChange = (event: React.ChangeEvent<{ value: SchemeMode }>) => {
+    const handleChange = (event: ChangeEvent) => {
         dispatch(schemeModeChanged(event.target.value as SchemeMode))
     };
 
@@ -34,7 +35,6 @@ const SetupSchemeMode: React.FC<{ theme: Theme }> = (_) => {
 
         </div>
     )
-
 }
 
 export default withTheme(SetupSchemeMode)
